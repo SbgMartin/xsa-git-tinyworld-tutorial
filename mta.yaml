@@ -1,0 +1,44 @@
+_schema-version: '2.0'
+ID: xsa.git.tinyworld.tutorial
+version: 0.0.1
+
+modules:
+ - name: tinydb
+   type: hdb
+   path: tinydb
+   requires:
+    - name: hdi-container_2
+
+ - name: tinyjs
+   type: nodejs
+   path: tinyjs
+   requires: 
+   - name: tinydb 
+   - name: hdi-container_2
+   provides: 
+   - name: tinyjs_api 
+     properties: 
+       service_url: ${default-url}
+
+
+ - name: tinyui
+   type: html5
+   path: tinyui
+# -- requires tinyjs service URL
+   requires:
+    - name: tinyjs_api
+      group: destinations
+      properties:
+        name: tinyjs_be
+        url: ~{service_url}
+
+resources:
+ - name: hdi-container
+   properties:
+      hdi-container-name: ${service-name}
+   type: com.sap.xs.hdi-container
+   
+ - name: hdi-container_2
+   properties:
+      hdi-container-name_2: ${service-name}
+   type: com.sap.xs.hdi-container
