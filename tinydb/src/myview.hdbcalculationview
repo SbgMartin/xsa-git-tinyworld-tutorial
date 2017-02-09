@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="xsa.git.tinyworld.tutorial.tinydb::myview" applyPrivilegeType="NONE" dataCategory="DEFAULT" dimensionType="" schemaVersion="3.0" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<descriptions defaultDescription="myview"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="xsa.git.tinyworld.tutorial.tinydb::tinyf.country">
+    <resourceUri>xsa.git.tinyworld.tutorial.tinydb::tinyf.country</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_1" filterExpressionLanguage="COLUMN_ENGINE">
+    <viewAttributes>
+      <viewAttribute id="name">
+        <descriptions defaultDescription="name"/>
+      </viewAttribute>
+      <viewAttribute id="partof_continent">
+        <descriptions defaultDescription="partof_continent"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="name" source="name"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="partof_continent" source="partof_continent"/>
+    </input>
+    <filter>&quot;partof_continent&quot;='Europe'</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="name">
+        <descriptions defaultDescription="name"/>
+      </viewAttribute>
+      <viewAttribute id="partof_continent">
+        <descriptions defaultDescription="partof_continent"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="xsa.git.tinyworld.tutorial.tinydb::tinyf.country">
+      <mapping xsi:type="Calculation:AttributeMapping" target="name" source="name"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="partof_continent" source="partof.continent"/>
+    </input>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Aggregation_1">
+  <attributes>
+    <attribute id="name" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="name"/>
+      <keyMapping columnObjectName="Aggregation_1" columnName="name"/>
+    </attribute>
+    <attribute id="partof_continent" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="partof_continent"/>
+      <keyMapping columnObjectName="Aggregation_1" columnName="partof_continent"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Aggregation_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="81" y="192"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="81" y="284"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

@@ -1,0 +1,1 @@
+service {	"xsa.git.tinyworld.tutorial.tinydb::myview" as "euro" keys generate local "ID";}
